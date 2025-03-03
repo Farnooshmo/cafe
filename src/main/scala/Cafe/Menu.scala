@@ -1,10 +1,10 @@
 package Cafe
 
- object  Menu extends App{
+ object  Menu extends App {
 
    abstract class Menu
    case class Drink(drinkName: String, size: String, isHot: Boolean, hasAlcohol: Boolean) extends Menu
-   val orderDrink:Drink = Drink("Hot Chocolatet","medium" ,isHot = true, hasAlcohol = false)
+   val orderDrink:Drink = Drink("Hot Chocolate","medium" ,isHot = true, hasAlcohol = false)
    val getPriceOfDrink = orderDrink match {
      case Drink("Coffee","small", true, false) => 1.00
      case Drink("Coffee","medium", true, false) => 1.50
@@ -30,7 +30,7 @@ package Cafe
      case _ =>  "Not a valid drink!"
    }
 
-
+println(s" $orderDrink is $getPriceOfDrink")
    case class Food(foodName: String, serveWarm: Boolean) extends Menu
    val orderFoood:Food = Food("Lasagna", serveWarm = true)
    val getPriceOfFood = orderFoood match {
