@@ -1,0 +1,5 @@
+package Cafe
+
+class Cafe {
+
+}
