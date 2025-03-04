@@ -60,6 +60,10 @@ object Menu extends App {
   val chocolateBrownie: Pastry = Pastry("Chocolate Brownie", "cold", 1.50, 40)
   val carrotCake: Pastry = Pastry("Carrot Cake", "cold", 1.50, 10)
 
+  val pastryList: List[Cafe.Menu.Pastry] = List(croissant, hotCroissant, cinnamonRole, hotCinnamonRole, applePie, hotApplePie, chocolateBrownie, carrotCake)
+  def PastryMenu: String = pastryList.map((p: Cafe.Menu.Pastry) => p.pastryName + " " + p.coldOrHot + " " + p.price + "£").mkString("\n")
+  println(PastryMenu)
+
 
   //add or remove from menu! It can be appended to the list menu
   case class PremiumSpecial(todaySpecial: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
