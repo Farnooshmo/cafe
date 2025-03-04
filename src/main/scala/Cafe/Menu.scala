@@ -1,77 +1,77 @@
 package Cafe
 
- object  Menu extends App {
+object Menu extends App {
 
-   abstract class Menu
-   case class Drink(drinkName: String, size: String, isHot: Boolean, hasAlcohol: Boolean) extends Menu
-   val orderDrink:Drink = Drink("Hot Chocolate","medium" ,isHot = true, hasAlcohol = false)
-   val getPriceOfDrink = orderDrink match {
-     case Drink("Coffee","small", true, false) => 1.00
-     case Drink("Coffee","medium", true, false) => 1.50
-     case Drink("Coffee","Large", true, false) => 2.00
-     case Drink("Hot Chocolate","small", true, false) => 2.20
-     case Drink("Hot Chocolate","medium", true, false) => 3.00
-     case Drink("Hot Chocolate","Large", true, false) => 3.20
-     case Drink("Green Tea","small", true, false) => 2.50
-     case Drink("Green Tea","medium", true, false) => 3.20
-     case Drink("Green Tea","Large", true, false) => 3.50
-     case Drink("Fresh Mint Tea","small", true, false) => 3.00
-     case Drink("Fresh Mint Tea","medium", true, false) => 3.50
-     case Drink("Fresh Mint Tea","Large", true, false) => 4.00
-     case Drink("Homemade Iced Tea","small", false, false) => 2.00
-     case Drink("Homemade Iced Tea","medium", false, false) => 3.00
-     case Drink("Homemade Iced Tea","Large", false, false) => 4.00
-     case Drink("Fresh Lemonade","small", false, false) => 2.50
-     case Drink("Fresh Lemonade","medium", false, false) => 3.50
-     case Drink("Fresh Lemonade","Large", false, false) => 4.50
-     case Drink("Mojito","medium", false, true) => 5.50
-     case Drink("Pina Colada","medium", false, true) => 6.00
-     case Drink("Gin & Tonic","medium", false, true) => 4.00
-     case _ =>  "Not a valid drink!"
-   }
+  abstract class Menu(stockAvailable: Int)
 
-println(s" $orderDrink is $getPriceOfDrink")
-   case class Food(foodName: String, serveWarm: Boolean) extends Menu
-   val orderFoood:Food = Food("Lasagna", serveWarm = true)
-   val getPriceOfFood = orderFoood match {
-     case Food("Lasagna", true) => 11.50
-     case Food("House salad", false) => 10.50
-     case Food("English breakfast", true) => 12.50
-     case Food("Quiche", true) => 11.50
-     case Food("Avocado Toast", false) => 8.00
-     case _ => "Not a valid food!"
-   }
-   case class Pastry(pastryName: String, serveCold: Boolean) extends Menu
-   val orderPastry:Pastry = Pastry("Croissant", serveCold = false)
-   val getPriceOfPastry = orderPastry match {
-     case Pastry("Croissant", true) => 0.90
-     case Pastry("Croissant", false) => 1.20
-     case Pastry("Cinnamon Role", true) => 1.10
-     case Pastry("Cinnamon Role", false) => 1.50
-     case Pastry("Apple pie", true) => 1.10
-     case Pastry("Apple pie", false) => 1.50
-     case Pastry("Chocolate Brownie", true) => 1.50
-     case Pastry("Carrot Cake", true) => 1.50
-     case _=> "Not a valid pastry!"
-   }
+  case class Drink(drinkName: String, size: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
 
-   //add or remove from menu! It can be appended to the list menu
-   case class PremiumSpecial(todaySpecial: String) extends Menu
-   val orderPermiumSpecial: PremiumSpecial = PremiumSpecial("Persian Love Cake")
-   val getPriceoFPremiumSpecial = orderPermiumSpecial match {
-     case PremiumSpecial("Persian Love Cake") => 10.00
-     case PremiumSpecial("Matcha Latte") => 6.00
-     case PremiumSpecial("Sourdough Panini with Goat Cheese, Onion and Honey") => 10.00
-     case PremiumSpecial("Roasted Vegetable Focaccia") => 10.00
-     case PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick") => 6.00
-     case PremiumSpecial("Mulled Wine") => 7.00
-     case PremiumSpecial("Hot Buttered Rum") => 7.00
-     case _ => "Not a valid PremiumSpecial!"
+  val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 200)
+  val coffeeMedium= coffeeSmall.copy(size = "medium", price = 1.20)
+  val coffeeLarge= coffeeMedium.copy(size ="large", price = 1.50)
+  val hotChocolateSmall: Drink = Drink("Hot Chocolate", "small", "hot", 2.00, 20)
+  val hotChocolateMedium: Drink = Drink("Hot Chocolate", "medium", "hot", 2.50, 20)
+  val hotChocolateLarge: Drink = Drink("Hot Chocolate", "large", "hot", 3.00, 20)
+  val greenTeaSmall: Drink = Drink("Green Tea", "small", "hot", 1.00, 200)
+  val greenTeaMedium: Drink = Drink("Green Tea", "medium", "hot", 1.20, 200)
+  val greenTeaLarge: Drink = Drink("Green Tea", "large", "hot", 1.50, 200)
+  val freshMintTeaSmall: Drink = Drink("Fresh Mint Tea", "small", "hot", 2.00, 50)
+  val freshMintTeaMedium: Drink = Drink("Fresh Mint Tea", "medium", "hot", 2.20, 50)
+  val freshMintTeaLarge: Drink = Drink("Fresh Mint Tea", "large", "hot", 2.50, 50)
+  val icedTeaSmall: Drink = Drink("Homemade Iced Tea", "small", "hot", 1.50, 40)
+  val icedTeaMedium: Drink = Drink("Homemade Iced Tea", "medium", "hot", 1.70, 40)
+  val icedTeaLarge: Drink = Drink("Homemade Iced Tea", "large", "hot", 1.90, 40)
+  val lemonadeSmall: Drink = Drink("Fresh Lemonade", "small", "cold", 3.00, 40)
+  val lemonadeMedium: Drink = Drink("Fresh Lemonade", "medium", "cold", 3.50, 40)
+  val lemonadeLarge: Drink = Drink("Fresh Lemonade", "large", "cold", 4.00, 40)
+  val mojito: Drink = Drink("Mojito", "medium", "cold", 7.00, 70)
+  val pinColada: Drink = Drink("Pina Colada", "medium", "cold", 8.00, 70)
+  val ginAndTonic: Drink = Drink("Gin & Tonic", "medium", "cold", 8.00, 70)
 
-   }
-   //stock count of the menu items. need to have an accumulator!
+ val drinkList: List[Cafe.Menu.Drink] = List(coffeeSmall, coffeeMedium, coffeeLarge, hotChocolateSmall, hotChocolateMedium, hotChocolateLarge, hotChocolateLarge, greenTeaSmall, greenTeaMedium, greenTeaLarge, freshMintTeaSmall, freshMintTeaMedium, freshMintTeaLarge, icedTeaSmall,icedTeaMedium,icedTeaLarge,lemonadeSmall, lemonadeMedium, lemonadeLarge, mojito, pinColada, ginAndTonic)
+//  def PriceOfDrink = drinkList.map((drink: Cafe.Menu.Drink) => drink.price)
+  def DrinkMenu: String = drinkList.map((x : Cafe.Menu.Drink) => x.drinkName + " " + x.size + " " + x.coldOrHot + " " +x.price + " £").mkString("\n")
+  println(DrinkMenu)
 
 
+
+
+  case class Food(foodName: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+
+  val lasagna: Food = Food("Lasagna", "hot", 11.50, 20)
+  val houseSalad: Food = Food("House salad", "cold", 10.50, 30)
+  val englishBreakfast: Food = Food("English breakfast", "hot", 12.50, 40)
+  val coronationQuiche: Food = Food("CoronationQuiche", "hot", 14.50, 10)
+  val avocadoOnToast: Food = Food("Avocado Toast", "cold", 8.00, 50)
+  val smokedSalmonPasta: Food = Food("Smoked Salmon Pasta", "hot", 10.50, 40)
+
+
+  case class Pastry(pastryName: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+
+  val croissant: Pastry = Pastry("Croissant", "cold", 0.90, 50)
+  val hotCroissant: Pastry = Pastry("Croissant", "hot", 1.20, 50)
+  val cinnamonRole: Pastry = Pastry("Cinnamon Role", "cold", 1.10, 50)
+  val hotCinnamonRole: Pastry = Pastry("Cinnamon Role", "hot", 1.50, 50)
+  val applePie: Pastry = Pastry("Apple pie", "cold", 1.10, 30)
+  val hotApplePie: Pastry = Pastry("Apple pie", "hot", 1.50, 30)
+  val chocolateBrownie: Pastry = Pastry("Chocolate Brownie", "cold", 1.50, 40)
+  val carrotCake: Pastry = Pastry("Carrot Cake", "cold", 1.50, 10)
+
+
+  //add or remove from menu! It can be appended to the list menu
+  case class PremiumSpecial(todaySpecial: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+
+  val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 50)
+  val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 150)
+  val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 10)
+  val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 20)
+  val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 50)
+  val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 50)
+
+
+  println(s"Today, you can enjoy ${matchaLatte.todaySpecial} as a premium special which serve ${matchaLatte.coldOrHot} and cost ${matchaLatte.price} £")
+
+  //stock count of the menu items. need to have an accumulator!
 
 
 }
