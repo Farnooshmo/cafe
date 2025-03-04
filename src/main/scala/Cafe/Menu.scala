@@ -7,8 +7,8 @@ object Menu extends App {
   case class Drink(drinkName: String, size: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
 
   val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 200)
-  val coffeeMedium= coffeeSmall.copy(size = "medium", price = 1.20)
-  val coffeeLarge= coffeeMedium.copy(size ="large", price = 1.50)
+  val coffeeMedium = coffeeSmall.copy(size = "medium", price = 1.20)
+  val coffeeLarge = coffeeMedium.copy(size = "large", price = 1.50)
   val hotChocolateSmall: Drink = Drink("Hot Chocolate", "small", "hot", 2.00, 20)
   val hotChocolateMedium: Drink = Drink("Hot Chocolate", "medium", "hot", 2.50, 20)
   val hotChocolateLarge: Drink = Drink("Hot Chocolate", "large", "hot", 3.00, 20)
@@ -28,12 +28,12 @@ object Menu extends App {
   val pinColada: Drink = Drink("Pina Colada", "medium", "cold", 8.00, 70)
   val ginAndTonic: Drink = Drink("Gin & Tonic", "medium", "cold", 8.00, 70)
 
- val drinkList: List[Cafe.Menu.Drink] = List(coffeeSmall, coffeeMedium, coffeeLarge, hotChocolateSmall, hotChocolateMedium, hotChocolateLarge, hotChocolateLarge, greenTeaSmall, greenTeaMedium, greenTeaLarge, freshMintTeaSmall, freshMintTeaMedium, freshMintTeaLarge, icedTeaSmall,icedTeaMedium,icedTeaLarge,lemonadeSmall, lemonadeMedium, lemonadeLarge, mojito, pinColada, ginAndTonic)
-//  def PriceOfDrink = drinkList.map((drink: Cafe.Menu.Drink) => drink.price)
-  def DrinkMenu: String = drinkList.map((x : Cafe.Menu.Drink) => x.drinkName + " " + x.size + " " + x.coldOrHot + " " +x.price + " £").mkString("\n")
+  val drinkList: List[Cafe.Menu.Drink] = List(coffeeSmall, coffeeMedium, coffeeLarge, hotChocolateSmall, hotChocolateMedium, hotChocolateLarge, hotChocolateLarge, greenTeaSmall, greenTeaMedium, greenTeaLarge, freshMintTeaSmall, freshMintTeaMedium, freshMintTeaLarge, icedTeaSmall, icedTeaMedium, icedTeaLarge, lemonadeSmall, lemonadeMedium, lemonadeLarge, mojito, pinColada, ginAndTonic)
+
+  //  def PriceOfDrink = drinkList.map((drink: Cafe.Menu.Drink) => drink.price)
+  def DrinkMenu: String = drinkList.map((x: Cafe.Menu.Drink) => x.drinkName + " " + x.size + " " + x.coldOrHot + " " + x.price + "£").mkString("\n")
+
   println(DrinkMenu)
-
-
 
 
   case class Food(foodName: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
@@ -45,6 +45,9 @@ object Menu extends App {
   val avocadoOnToast: Food = Food("Avocado Toast", "cold", 8.00, 50)
   val smokedSalmonPasta: Food = Food("Smoked Salmon Pasta", "hot", 10.50, 40)
 
+  val foodList: List[Cafe.Menu.Food] = List(lasagna, houseSalad, englishBreakfast, coronationQuiche, avocadoOnToast, smokedSalmonPasta)
+  def FoodMenu: String = foodList.map((f: Cafe.Menu.Food) => f.foodName + " " + f.coldOrHot + " " + f.price + "£").mkString("\n")
+  println(FoodMenu)
 
   case class Pastry(pastryName: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
 
