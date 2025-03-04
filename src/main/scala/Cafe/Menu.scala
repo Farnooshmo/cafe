@@ -68,16 +68,19 @@ object Menu extends App {
   //add or remove from menu! It can be appended to the list menu
   case class PremiumSpecial(todaySpecial: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
 
-  val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 50)
-  val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 150)
-  val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 10)
-  val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 20)
-  val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 50)
-  val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 50)
+  val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 0)
+  val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 0)
+  val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 0)
+  val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 0)
+  val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 0)
+  val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 0)
 
-
-  println(s"Today, you can enjoy ${matchaLatte.todaySpecial} as a premium special which serve ${matchaLatte.coldOrHot} and cost ${matchaLatte.price} £")
-
+  val premiumSpecialList:List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia,sourdoughPanini,persianTea,hotButteredRum)
+  val avaiablilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter( a => a.stockAvailable > 0)
+  def PremiumSpecialMenu: String = avaiablilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
+    stock.todaySpecial + s"(today's special with love) ${stock.price} £"
+  } else "Nothing special for today!").mkString("\n")
+ println(PremiumSpecialMenu)
   //stock count of the menu items. need to have an accumulator!
 
 
