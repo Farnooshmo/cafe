@@ -87,5 +87,4 @@ object Menu extends App {
 
   val menuList = drinkList ++ foodList ++ pastryList ++ availabilityOfPremiumSpecial
 
-
 }
