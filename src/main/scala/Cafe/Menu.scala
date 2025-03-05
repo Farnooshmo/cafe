@@ -80,9 +80,9 @@ object Menu extends App {
   val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 0)
 
   val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia, sourdoughPanini, persianTea, hotButteredRum)
-  val avaiablilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter(a => a.stockAvailable > 0)
+  val availabilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter(a => a.stockAvailable > 0)
 
-  def PremiumSpecialMenu: String = avaiablilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
+  def PremiumSpecialMenu: String = availabilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
     stock.name + s"(today's special with love) ${stock.price} £"
   } else "Nothing special for today!").mkString("\n")
 
@@ -90,7 +90,7 @@ object Menu extends App {
 
   val menu = "-----Menu---- \n" + DrinkMenu + "\n--------- \n" + FoodMenu + "\n--------- \n" + PastryMenu + "\n--------- \n" + PremiumSpecialMenu
   print(menu)
-  val menuList = drinkList ++ foodList ++ pastryList ++ avaiablilityOfPremiumSpecial
+  val menuList = drinkList ++ foodList ++ pastryList ++ availabilityOfPremiumSpecial
   println(menuList)
   println(menuList)
 
