@@ -2,9 +2,9 @@ package Cafe
 
 object Menu extends App {
 
-  abstract class Menu(stockAvailable: Int)
+  abstract class Menu(val name: String, val price: Double, val coldOrHot: String, val stockAvailable: Int)
 
-  case class Drink(drinkName: String, size: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+  case class Drink(override val name: String, size: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 200)
   val coffeeMedium = coffeeSmall.copy(size = "medium", price = 1.20)
@@ -31,12 +31,12 @@ object Menu extends App {
   val drinkList: List[Cafe.Menu.Drink] = List(coffeeSmall, coffeeMedium, coffeeLarge, hotChocolateSmall, hotChocolateMedium, hotChocolateLarge, hotChocolateLarge, greenTeaSmall, greenTeaMedium, greenTeaLarge, freshMintTeaSmall, freshMintTeaMedium, freshMintTeaLarge, icedTeaSmall, icedTeaMedium, icedTeaLarge, lemonadeSmall, lemonadeMedium, lemonadeLarge, mojito, pinColada, ginAndTonic)
 
   //  def PriceOfDrink = drinkList.map((drink: Cafe.Menu.Drink) => drink.price)
-  def DrinkMenu: String = drinkList.map((x: Cafe.Menu.Drink) => x.drinkName + " " + x.size + " " + x.coldOrHot + " " + x.price + "£").mkString("\n")
+  def DrinkMenu: String = drinkList.map((x: Cafe.Menu.Drink) => x.name + " " + x.size + " " + x.coldOrHot + " " + x.price + "£").mkString("\n")
 
   println(DrinkMenu)
 
 
-  case class Food(foodName: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+  case class Food(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val lasagna: Food = Food("Lasagna", "hot", 11.50, 20)
   val houseSalad: Food = Food("House salad", "cold", 10.50, 30)
@@ -46,10 +46,12 @@ object Menu extends App {
   val smokedSalmonPasta: Food = Food("Smoked Salmon Pasta", "hot", 10.50, 40)
 
   val foodList: List[Cafe.Menu.Food] = List(lasagna, houseSalad, englishBreakfast, coronationQuiche, avocadoOnToast, smokedSalmonPasta)
-  def FoodMenu: String = foodList.map((f: Cafe.Menu.Food) => f.foodName + " " + f.coldOrHot + " " + f.price + "£").mkString("\n")
+
+  def FoodMenu: String = foodList.map((f: Cafe.Menu.Food) => f.name + " " + f.coldOrHot + " " + f.price + "£").mkString("\n")
+
   println(FoodMenu)
 
-  case class Pastry(pastryName: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+  case class Pastry(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val croissant: Pastry = Pastry("Croissant", "cold", 0.90, 50)
   val hotCroissant: Pastry = Pastry("Croissant", "hot", 1.20, 50)
@@ -61,12 +63,14 @@ object Menu extends App {
   val carrotCake: Pastry = Pastry("Carrot Cake", "cold", 1.50, 10)
 
   val pastryList: List[Cafe.Menu.Pastry] = List(croissant, hotCroissant, cinnamonRole, hotCinnamonRole, applePie, hotApplePie, chocolateBrownie, carrotCake)
-  def PastryMenu: String = pastryList.map((p: Cafe.Menu.Pastry) => p.pastryName + " " + p.coldOrHot + " " + p.price + "£").mkString("\n")
+
+  def PastryMenu: String = pastryList.map((p: Cafe.Menu.Pastry) => p.name + " " + p.coldOrHot + " " + p.price + "£").mkString("\n")
+
   println(PastryMenu)
 
 
   //add or remove from menu! It can be appended to the list menu
-  case class PremiumSpecial(todaySpecial: String, coldOrHot: String, price: Double, stockAvailable: Int) extends Menu(stockAvailable: Int)
+  case class PremiumSpecial(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 0)
   val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 0)
@@ -75,14 +79,20 @@ object Menu extends App {
   val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 0)
   val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 0)
 
-  val premiumSpecialList:List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia,sourdoughPanini,persianTea,hotButteredRum)
-  val avaiablilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter( a => a.stockAvailable > 0)
-  def PremiumSpecialMenu: String = avaiablilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
-    stock.todaySpecial + s"(today's special with love) ${stock.price} £"
-  } else "Nothing special for today!").mkString("\n")
- println(PremiumSpecialMenu)
+  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia, sourdoughPanini, persianTea, hotButteredRum)
+  val avaiablilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter(a => a.stockAvailable > 0)
 
-  val menu = "-----Menu---- \n" +DrinkMenu + "\n--------- \n"+ FoodMenu + "\n--------- \n"+ PastryMenu +"\n--------- \n"+ PremiumSpecialMenu
+  def PremiumSpecialMenu: String = avaiablilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
+    stock.name + s"(today's special with love) ${stock.price} £"
+  } else "Nothing special for today!").mkString("\n")
+
+  println(PremiumSpecialMenu)
+
+  val menu = "-----Menu---- \n" + DrinkMenu + "\n--------- \n" + FoodMenu + "\n--------- \n" + PastryMenu + "\n--------- \n" + PremiumSpecialMenu
   print(menu)
+  val menuList = drinkList ++ foodList ++ pastryList ++ avaiablilityOfPremiumSpecial
+  println(menuList)
+  println(menuList)
+
 
 }
