@@ -81,7 +81,8 @@ object Menu extends App {
     stock.todaySpecial + s"(today's special with love) ${stock.price} £"
   } else "Nothing special for today!").mkString("\n")
  println(PremiumSpecialMenu)
-  //stock count of the menu items. need to have an accumulator!
 
+  val menu = "-----Menu---- \n" +DrinkMenu + "\n--------- \n"+ FoodMenu + "\n--------- \n"+ PastryMenu +"\n--------- \n"+ PremiumSpecialMenu
+  print(menu)
 
 }
