@@ -4,6 +4,8 @@ object Menu extends App {
 
   abstract class Menu(val name: String, val price: Double, val coldOrHot: String, val stockAvailable: Int)
 
+
+  //Drink
   case class Drink(override val name: String, size: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 200)
@@ -30,12 +32,9 @@ object Menu extends App {
 
   val drinkList: List[Cafe.Menu.Drink] = List(coffeeSmall, coffeeMedium, coffeeLarge, hotChocolateSmall, hotChocolateMedium, hotChocolateLarge, hotChocolateLarge, greenTeaSmall, greenTeaMedium, greenTeaLarge, freshMintTeaSmall, freshMintTeaMedium, freshMintTeaLarge, icedTeaSmall, icedTeaMedium, icedTeaLarge, lemonadeSmall, lemonadeMedium, lemonadeLarge, mojito, pinColada, ginAndTonic)
 
-  //  def PriceOfDrink = drinkList.map((drink: Cafe.Menu.Drink) => drink.price)
   def DrinkMenu: String = drinkList.map((x: Cafe.Menu.Drink) => x.name + " " + x.size + " " + x.coldOrHot + " " + x.price + "£").mkString("\n")
 
-  println(DrinkMenu)
-
-
+  //Food
   case class Food(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val lasagna: Food = Food("Lasagna", "hot", 11.50, 20)
@@ -49,8 +48,7 @@ object Menu extends App {
 
   def FoodMenu: String = foodList.map((f: Cafe.Menu.Food) => f.name + " " + f.coldOrHot + " " + f.price + "£").mkString("\n")
 
-  println(FoodMenu)
-
+  //Pastry
   case class Pastry(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val croissant: Pastry = Pastry("Croissant", "cold", 0.90, 50)
@@ -66,17 +64,15 @@ object Menu extends App {
 
   def PastryMenu: String = pastryList.map((p: Cafe.Menu.Pastry) => p.name + " " + p.coldOrHot + " " + p.price + "£").mkString("\n")
 
-  println(PastryMenu)
 
-
-  //add or remove from menu! It can be appended to the list menu
+  //Premium Special
   case class PremiumSpecial(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
   val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 0)
   val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 0)
   val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 0)
   val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 0)
-  val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 0)
+  val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 10)
   val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 0)
 
   val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia, sourdoughPanini, persianTea, hotButteredRum)
@@ -86,13 +82,10 @@ object Menu extends App {
     stock.name + s"(today's special with love) ${stock.price} £"
   } else "Nothing special for today!").mkString("\n")
 
-  println(PremiumSpecialMenu)
-
+  //Menu
   val menu = "-----Menu---- \n" + DrinkMenu + "\n--------- \n" + FoodMenu + "\n--------- \n" + PastryMenu + "\n--------- \n" + PremiumSpecialMenu
-  print(menu)
+
   val menuList = drinkList ++ foodList ++ pastryList ++ availabilityOfPremiumSpecial
-  println(menuList)
-  println(menuList)
 
 
 }
