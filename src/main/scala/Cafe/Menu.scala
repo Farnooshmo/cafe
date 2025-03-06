@@ -1,5 +1,8 @@
 package Cafe
 
+import scala.collection.IterableOnce.iterableOnceExtensionMethods
+import scala.math.Ordered.orderingToOrdered
+
 object Menu extends App {
 
   abstract class Menu(val name: String, val price: Double, val coldOrHot: String, val stockAvailable: Int)
@@ -8,9 +11,9 @@ object Menu extends App {
   //Drink
   case class Drink(override val name: String, size: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
-  val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 200)
-  val coffeeMedium = coffeeSmall.copy(size = "medium", price = 1.20)
-  val coffeeLarge = coffeeMedium.copy(size = "large", price = 1.50)
+  val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 0)
+  val coffeeMedium = coffeeSmall.copy(size = "medium", price = 1.20, stockAvailable = 300)
+  val coffeeLarge = coffeeMedium.copy(size = "large", price = 1.50, stockAvailable =100)
   val hotChocolateSmall: Drink = Drink("Hot Chocolate", "small", "hot", 2.00, 20)
   val hotChocolateMedium: Drink = Drink("Hot Chocolate", "medium", "hot", 2.50, 20)
   val hotChocolateLarge: Drink = Drink("Hot Chocolate", "large", "hot", 3.00, 20)
@@ -21,12 +24,12 @@ object Menu extends App {
   val freshMintTeaMedium: Drink = Drink("Fresh Mint Tea", "medium", "hot", 2.20, 50)
   val freshMintTeaLarge: Drink = Drink("Fresh Mint Tea", "large", "hot", 2.50, 50)
   val icedTeaSmall: Drink = Drink("Homemade Iced Tea", "small", "hot", 1.50, 40)
-  val icedTeaMedium: Drink = Drink("Homemade Iced Tea", "medium", "hot", 1.70, 40)
+  val icedTeaMedium: Drink =Drink("Homemade Iced Tea", "medium", "hot", 1.70, 40)
   val icedTeaLarge: Drink = Drink("Homemade Iced Tea", "large", "hot", 1.90, 40)
   val lemonadeSmall: Drink = Drink("Fresh Lemonade", "small", "cold", 3.00, 40)
   val lemonadeMedium: Drink = Drink("Fresh Lemonade", "medium", "cold", 3.50, 40)
   val lemonadeLarge: Drink = Drink("Fresh Lemonade", "large", "cold", 4.00, 40)
-  val mojito: Drink = Drink("Mojito", "medium", "cold", 7.00, 70)
+  val mojito: Drink = Drink("Mojito", "medium", "cold", 7.00, 0)
   val pinColada: Drink = Drink("Pina Colada", "medium", "cold", 8.00, 70)
   val ginAndTonic: Drink = Drink("Gin & Tonic", "medium", "cold", 8.00, 70)
 
@@ -72,10 +75,8 @@ object Menu extends App {
   val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 0)
   val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 0)
   val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 0)
-  val persianTea: PremiumSpecial = PremiumSpecial("Brewed Persian Tea with rose petals and cinnamon stick", "hot", 5.00, 10)
-  val hotButteredRum: PremiumSpecial = PremiumSpecial("Hot Buttered Rum", "hot", 7.00, 0)
 
-  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia, sourdoughPanini, persianTea, hotButteredRum)
+  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia, sourdoughPanini)
   val availabilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter(a => a.stockAvailable > 0)
 
   def PremiumSpecialMenu: String = availabilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
@@ -86,5 +87,10 @@ object Menu extends App {
   val menu = "-----Menu---- \n" + DrinkMenu + "\n--------- \n" + FoodMenu + "\n--------- \n" + PastryMenu + "\n--------- \n" + PremiumSpecialMenu
 
   val menuList = drinkList ++ foodList ++ pastryList ++ availabilityOfPremiumSpecial
+
+
+
+
+
 
 }

@@ -1,6 +1,0 @@
-package Cafe
-
-class Cafe {
-
-
-}
