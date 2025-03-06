@@ -71,12 +71,11 @@ object Menu extends App {
   //Premium Special
   case class PremiumSpecial(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
 
-  val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 0)
-  val matchaLatte: PremiumSpecial = PremiumSpecial("Matcha Latte", "hot", 6.00, 0)
-  val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 0)
+  val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 10)
+  val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 10)
   val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 0)
 
-  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, matchaLatte, roastedVegetableFocaccia, sourdoughPanini)
+  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, roastedVegetableFocaccia, sourdoughPanini)
   val availabilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter(a => a.stockAvailable > 0)
 
   def PremiumSpecialMenu: String = availabilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
@@ -89,7 +88,7 @@ object Menu extends App {
   val menuList = drinkList ++ foodList ++ pastryList ++ availabilityOfPremiumSpecial
 
 
-
+val filteredDrink = menuList.filter(item => !(item.isInstanceOf[Drink]))
 
 
 
