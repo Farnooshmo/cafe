@@ -27,15 +27,13 @@ class ServiceCharge {
     //    val twentyFivePercent: Boolean = order.exists(item => item.isInstanceOf[PremiumSpecial])
 
     if(order.forall(order => order.isInstanceOf[PremiumSpecial])) {
-      total * 0.25
-    } else if(order.exists(order => order.coldOrHot == "hot")) {
-      total * 0.2
-    } else if(order.exists(order => order.coldOrHot == "cold"))  {
-      total * 0.1
-    } else if (order.forall(order => order.isInstanceOf[Drink])) {
-      total
+      BigDecimal(total * 0.25).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+    } else if(order.exists(order => order.coldOrHot == "hot") && order.forall(item => (!item.isInstanceOf[Drink]))) {
+      BigDecimal(total * 0.2).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
+    } else if(order.exists(order => order.coldOrHot == "cold") && order.forall(item => (!item.isInstanceOf[Drink])))  {
+      BigDecimal(total * 0.1).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble
     } else
-      total + 2 //automatically applied 2 to service charge
+      0
   }
   println(calculateServiceCharge(List(MenuItem.persianLoveCake), 20))
 

@@ -1,7 +1,7 @@
 package Cafe
 
 object MenuItem {
-  val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 0)
+  val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 10)
   val coffeeMedium = coffeeSmall.copy(size = "medium", price = 1.20, stockAvailable = 300)
   val coffeeLarge = coffeeMedium.copy(size = "large", price = 1.50, stockAvailable = 100)
   val hotChocolateSmall: Drink = Drink("Hot Chocolate", "small", "hot", 2.00, 20)
