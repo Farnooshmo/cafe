@@ -1,6 +1,5 @@
 package Cafe
 
-import Cafe.Menu.{Drink, menuList}
 import org.scalatest.flatspec.AnyFlatSpec
 
 

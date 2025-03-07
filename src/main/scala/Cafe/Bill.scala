@@ -1,8 +1,5 @@
 package Cafe
 
-import Cafe.Menu.{Drink, Menu, PremiumSpecial, coffeeMedium, coffeeSmall, filteredDrink, menuList}
-
-
 class Customer(val customer: Int)
 class Items(val items: List[String])
 class Quantity(val quantity: Int)
