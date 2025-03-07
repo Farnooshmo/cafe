@@ -9,7 +9,7 @@ object Menu extends App {
 
 
   //Drink
-  case class Drink(override val name: String, size: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
+  case class Drink(override val name: String, size: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name, price, coldOrHot, stockAvailable)
 
   val coffeeSmall: Drink = Drink("Coffee", "small", "hot", 1.00, 0)
   val coffeeMedium = coffeeSmall.copy(size = "medium", price = 1.20, stockAvailable = 300)
@@ -23,9 +23,9 @@ object Menu extends App {
   val freshMintTeaSmall: Drink = Drink("Fresh Mint Tea", "small", "hot", 2.00, 50)
   val freshMintTeaMedium: Drink = Drink("Fresh Mint Tea", "medium", "hot", 2.20, 50)
   val freshMintTeaLarge: Drink = Drink("Fresh Mint Tea", "large", "hot", 2.50, 50)
-  val icedTeaSmall: Drink = Drink("Homemade Iced Tea", "small", "hot", 1.50, 40)
-  val icedTeaMedium: Drink =Drink("Homemade Iced Tea", "medium", "hot", 1.70, 40)
-  val icedTeaLarge: Drink = Drink("Homemade Iced Tea", "large", "hot", 1.90, 40)
+  val icedTeaSmall: Drink = Drink("Homemade Iced Tea", "small", "cold", 1.50, 40)
+  val icedTeaMedium: Drink =Drink("Homemade Iced Tea", "medium", "cold", 1.70, 40)
+  val icedTeaLarge: Drink = Drink("Homemade Iced Tea", "large", "cold", 1.90, 40)
   val lemonadeSmall: Drink = Drink("Fresh Lemonade", "small", "cold", 3.00, 40)
   val lemonadeMedium: Drink = Drink("Fresh Lemonade", "medium", "cold", 3.50, 40)
   val lemonadeLarge: Drink = Drink("Fresh Lemonade", "large", "cold", 4.00, 40)
@@ -38,7 +38,7 @@ object Menu extends App {
   def DrinkMenu: String = drinkList.map((x: Cafe.Menu.Drink) => x.name + " " + x.size + " " + x.coldOrHot + " " + x.price + "£").mkString("\n")
 
   //Food
-  case class Food(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
+  case class Food(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name, price, coldOrHot, stockAvailable)
 
   val lasagna: Food = Food("Lasagna", "hot", 11.50, 20)
   val houseSalad: Food = Food("House salad", "cold", 10.50, 30)
@@ -52,7 +52,7 @@ object Menu extends App {
   def FoodMenu: String = foodList.map((f: Cafe.Menu.Food) => f.name + " " + f.coldOrHot + " " + f.price + "£").mkString("\n")
 
   //Pastry
-  case class Pastry(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
+  case class Pastry(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name, price, coldOrHot, stockAvailable)
 
   val croissant: Pastry = Pastry("Croissant", "cold", 0.90, 50)
   val hotCroissant: Pastry = Pastry("Croissant", "hot", 1.20, 50)
@@ -69,13 +69,13 @@ object Menu extends App {
 
 
   //Premium Special
-  case class PremiumSpecial(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name: String, price: Double, coldOrHot: String, stockAvailable: Int)
+  case class PremiumSpecial(override val name: String, override val coldOrHot: String, override val price: Double, override val stockAvailable: Int) extends Menu(name, price, coldOrHot, stockAvailable)
 
   val persianLoveCake: PremiumSpecial = PremiumSpecial("Persian Love Cake", "cold", 10.00, 10)
   val roastedVegetableFocaccia: PremiumSpecial = PremiumSpecial("Roasted Vegetable Focaccia", "hot", 10.00, 10)
   val sourdoughPanini: PremiumSpecial = PremiumSpecial("Sourdough Panini with Goat Cheese", "hot", 10.00, 0)
 
-  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] = List(persianLoveCake, roastedVegetableFocaccia, sourdoughPanini)
+  val premiumSpecialList: List[Cafe.Menu.PremiumSpecial] =  sourdoughPanini)
   val availabilityOfPremiumSpecial: List[Cafe.Menu.PremiumSpecial] = premiumSpecialList.filter(a => a.stockAvailable > 0)
 
   def PremiumSpecialMenu: String = availabilityOfPremiumSpecial.map((stock: Cafe.Menu.PremiumSpecial) => if (stock.stockAvailable != 0) {
